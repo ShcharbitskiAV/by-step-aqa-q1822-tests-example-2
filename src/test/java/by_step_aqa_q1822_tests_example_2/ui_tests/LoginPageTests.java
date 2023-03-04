@@ -2,8 +2,6 @@ package by_step_aqa_q1822_tests_example_2.ui_tests;
 
 import by_step_aqa_q1822_tests_example_2.base_config.Config;
 import by_step_aqa_q1822_tests_example_2.service.LoginService;
-import dev.failsafe.internal.util.Assert;
-import org.junit.jupiter.api.AssertionFailureBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +30,7 @@ public class LoginPageTests extends Config {
 
     @Test
 
-    public void verifyCheckbox () {
+    public void verifyCheckbox() {
         WebElement checkboxOn = driver.findElement(By.xpath("//span[@class='VkIdCheckbox__checkboxOn']"));
         checkboxOn.click();
         checkboxOn.isDisplayed();
@@ -46,34 +44,53 @@ public class LoginPageTests extends Config {
     @Test
     public void verifyLinkToGooglePlay() {
 
-        String expectedLink = "https://play.google.com/store/apps/details?id=com.vkontakte.android";
+        loginService = new LoginService(driver);
 
+        String expectedLink = "https://play.google.com/store/apps/details?id=com.vkontakte.android";
         String expectedText = "Google Play";
 
-        WebElement linkToStore = driver.findElement(By.xpath("//span[@class='FlatButton__content']"));
-        linkToStore.isDisplayed();
+        String actualLink = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonGooglePlay.getAttribute("href");
+        String actualText = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonGooglePlay.getText();
 
-        linkToStore.getAttribute("href");
-        Assertions.assertEquals(expectedLink, "https://play.google.com/store/apps/details?id=com.vkontakte.android");
-        Assertions.assertEquals(expectedText, linkToStore.getText());
+        Assertions.assertTrue(loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonGooglePlay.isDisplayed());
+        Assertions.assertEquals(expectedLink, actualLink);
+        Assertions.assertEquals(expectedText, actualText);
 
     }
 
     @Test
-    public void verifyLinkToRustore() {
+    public void verifyLinkToRuStore() {
 
-        WebElement linkToRustore = driver.findElement(By.xpath("//span[text()='RuStore']"));
+        loginService = new LoginService(driver);
 
         String expectedLink = "https://apps.rustore.ru/app/com.vkontakte.android";
         String expectedText = "RuStore";
 
+        String actualLink = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonRuStore.getAttribute("href");
+        String actualText = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonRuStore.getText();
 
-        //Assertions.assertEquals(expectedLink, linkToRustore.getAttribute(expectedLink));
-        Assertions.assertEquals(expectedText, linkToRustore.getText());
+
+        Assertions.assertTrue(loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonRuStore.isDisplayed());
+        Assertions.assertEquals(expectedLink, actualLink);
+        Assertions.assertEquals(expectedText, actualText);
 
     }
 
+    @Test
+    public void verifyLinkToAppStore() {
 
+        loginService = new LoginService(driver);
+
+        String expectedLink = "https://itunes.apple.com/ru/app/id564177498";
+        String expectedText = "App Store";
+
+        String actualLink = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonAppStore.getAttribute("href");
+        String actualText = loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonAppStore.getText();
+
+        Assertions.assertTrue(loginService.getLoginPage().getLoginFormLinkToMobileApps().buttonAppStore.isDisplayed());
+        Assertions.assertEquals(expectedLink, actualLink);
+        Assertions.assertEquals(expectedText, actualText);
+    }
 
 
 }

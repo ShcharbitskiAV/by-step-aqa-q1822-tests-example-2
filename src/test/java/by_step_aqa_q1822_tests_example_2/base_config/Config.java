@@ -13,7 +13,7 @@ public class Config {
 
     @BeforeAll
     public void startWebDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Q1822\\by-step-aqa-q1822-tests-example-2\\src\\test\\resources\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\testing\\by-step-aqa-q1822-tests-example-2\\src\\test\\resources\\chromedriverforwin7.exe");
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
